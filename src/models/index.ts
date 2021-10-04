@@ -1,11 +1,17 @@
 import { Sequelize } from 'sequelize';
-import { PartnerModel } from './partner.model';
 
-const mySequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+const Database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.HOST,
-    dialect: 'mysql',
+    dialect: 'mysql'
 });
 
-const partner = PartnerModel(mySequelize, Sequelize);
+// Import all models
+import { PartnerModel } from './partner.model';
+import { UserModel } from './user.model';
 
-export { Sequelize, mySequelize, partner };
+// Export all
+export {
+    PartnerModel,
+    UserModel,
+    Database
+};

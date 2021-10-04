@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
-import { partner, Sequelize } from '../models';
+import { PartnerModel } from '../models';
 
 // Types
 import { PartnerAttributes } from '../types/partner';
@@ -11,15 +11,17 @@ export async function create(req: Request, res: Response) {
         description: req.body.description
     };
 
-    const creation = await partner.create(newPartner);
-    const last = await partner.findByPk(creation.id);
+    const creation = await PartnerModel.create(newPartner);
+    // const last = await PartnerModel.findByPk(creation.id);
+
+    // res.send(last);
 }
 
 export async function getAll(req: Request, res: Response) {
-    const partners = await partner.findAll();
+    const partners = await PartnerModel.findAll();
 
     if (partners.length === 0) {
-        res.send({message: 'No partner found.'})
+        res.send({message: 'No partner found.'});
     } else {
         res.send(partners);
     }

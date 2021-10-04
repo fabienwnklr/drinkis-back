@@ -1,37 +1,31 @@
-export const PartnerModel = (mySequelize, Sequelize) => {
-    const Partner = mySequelize.define(
+import { DataTypes } from 'sequelize';
+import { PartnerInstance } from '../types/partner';
+import { Database } from './index';
+
+export const PartnerModel = Database.define<PartnerInstance>(
         'Partner',
         {
             // Model attributes are defined here
             name: {
                 allowNull: false,
-                type: Sequelize.STRING(255)
+                type: DataTypes.STRING(255)
             },
             createdBy: {
                 allowNull: false,
-                type: Sequelize.STRING(255)
+                type: DataTypes.STRING(255)
             },
-            createdAt: {
+            description: {
                 allowNull: false,
-                defaultValue: mySequelize.literal('NOW()'),
-                type: Sequelize.DATE
+                type: DataTypes.TEXT
             },
             imgUrl: {
                 allowNull: true,
-                type: Sequelize.STRING(255)
+                type: DataTypes.STRING(255)
             },
             updatedBy: {
                 allowNull: true,
-                type: Sequelize.STRING(255)
-            },
-            updatedAt: {
-                allowNull: true,
-                defaultValue: mySequelize.literal('NOW()'),
-                type: Sequelize.DATE
+                type: DataTypes.STRING(255)
             }
         },
         { freezeTableName: true }
     );
-
-    return Partner;
-};

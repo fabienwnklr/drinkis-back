@@ -4,8 +4,9 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "build": "ts-node src/server.ts",
-        "dev": "tslint -c tslint.json -p tsconfig.json --fix && nodemon ./src/server.ts"
+        "build": "tsc",
+        "dev": "tslint -c tslint.json -p tsconfig.json --fix && nodemon ./src/server.ts",
+        "format": "tslint -c tslint.json -p tsconfig.json --fix"
     },
     "devDependencies": {
         "@types/express": "^4.17.13",
