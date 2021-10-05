@@ -6,11 +6,11 @@ export interface UserAttributes {
     lastName: string;
     email: string;
     password: string;
-    token: boolean;
-    phoneNumber?: number;
-    birthDate?: Date;
-    createdBy: string;
-    updatedBy: string;
+    phoneNumber: number;
+    token?: boolean;
+    birthDate?: string;
+    createdBy?: string;
+    updatedBy?: string;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}

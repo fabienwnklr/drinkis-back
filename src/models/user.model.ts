@@ -32,7 +32,7 @@ export const UserModel = Database.define<UserInstance>(
         },
         birthDate: {
             allowNull: false,
-            type: DataTypes.DATE()
+            type: DataTypes.DATEONLY()
         },
         createdBy: {
             allowNull: false,
