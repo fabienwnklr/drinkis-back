@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config();
 
 import express, { Application, Request, Response } from 'express';
-import { init } from './db/init';
+import { createDB } from './db';
 import { Database } from './models';
 import PatnerRoutes from './routes/partner.routes';
 
@@ -23,7 +23,7 @@ try {
         console.info('Re-sync db.');
         app.listen(port, () => {
             console.log(`API running on http://localhost:${port}`);
-            init();
+            createDB();
         });
     });
 } catch (error) {

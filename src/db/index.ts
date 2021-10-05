@@ -1,6 +1,6 @@
 import { createConnection } from 'mysql2/promise';
 
-export async function init() {
+export async function createDB() {
     try {
         const connection = await createConnection({
             host: process.env.DB_HOST,

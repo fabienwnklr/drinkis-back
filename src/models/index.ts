@@ -9,7 +9,7 @@ const Database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process
 import { PartnerModel } from './partner.model';
 import { UserModel } from './user.model';
 
-// Export all
+// Export all .. import..export..import..export again..
 export {
     PartnerModel,
     UserModel,

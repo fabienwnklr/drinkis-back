@@ -16,9 +16,9 @@ export async function create(req: Request, res: Response) {
         const creation = await PartnerModel.create(newPartner);
         const last = await PartnerModel.findByPk(creation.id);
 
-        res.send(last);
+        res.send({ message: 'Partner created successfully', data: last });
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 }
 
@@ -32,7 +32,7 @@ export async function getAll(req: Request, res: Response) {
             res.send(partners);
         }
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 }
 
@@ -43,7 +43,7 @@ export async function getOne(req: Request, res: Response) {
 
         res.send(partner);
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 }
 
@@ -61,7 +61,7 @@ export async function update(req: Request, res: Response) {
             });
         }
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 };
 
@@ -71,12 +71,12 @@ export async function remove(req: Request, res: Response) {
         const removedPartner = await PartnerModel.destroy({ where: { id } });
         
         if (removedPartner === 1) {
-            res.send({ message: 'Partenaire supprimé.'})
+            res.send({ message: 'Partner deleted successfully.'})
         } else {
-            res.send({ message: 'Nous ne pouvons supprimé le partenaire.. Peut-être est il déjà supprimé.'})
+            res.send({ message: `Cannot remove partner with id ${id}, maybe already removed.`})
         }
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 }
 
@@ -86,6 +86,6 @@ export async function removeAll(req: Request, res: Response) {
 
         res.send({ message: `${removedAll} partenaires on bien été supprimé.` });
     } catch (error) {
-        catchAsync(res, 'Une erreur est survenue, veuillez contacter un admin.', error);
+        catchAsync(res, 'An error occured, please contact admin.', error);
     }
 }
