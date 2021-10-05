@@ -1,12 +1,12 @@
-import { Optional, Model, DataTypes } from 'sequelize';
+import { Optional, Model } from 'sequelize';
 
 export interface PartnerAttributes {
     id?: number;
     name: string;
     description: string;
     imgUrl?: string;
-    createdBy?: DataTypes.StringDataType;
-    updatedBy?: DataTypes.StringDataType;
+    createdBy?: string;
+    updatedBy?: string;
 }
 
 export interface PartnerCreationAttributes extends Optional<PartnerAttributes, 'id'> {}
