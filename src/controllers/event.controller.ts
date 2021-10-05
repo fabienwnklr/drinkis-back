@@ -1,25 +1,24 @@
 import { Request, Response } from 'express';
-import { UserModel } from '../models';
+import { EventModel } from '../models';
 import { catchAsync } from '../utils';
 
 // Types
-import { UserAttributes } from '../types/user';
+import { EventAttributes } from '../types/event';
 
 export async function create(req: Request, res: Response) {
     try {
-        const newUser: UserAttributes = {
-            firstName: req.params.firstName,
-            lastName: req.params.lastName,
-            email: req.params.email,
-            password: req.params.password,
-            phoneNumber: parseInt(req.params.phoneNumber, 10),
-            birthDate: req.params.birthDate,
+        const newEvent: EventAttributes = {
+            name: req.body.name,
+            description: req.body.description,
+            createdBy: req.body.username,
+            start_date: req.body.start_date,
+            end_date: req.body.end_date,
         };
 
-        const creation = await UserModel.create(newUser);
-        const last = await UserModel.findByPk(creation.id);
+        const creation = await EventModel.create(newEvent);
+        const last = await EventModel.findByPk(creation.id);
 
-        res.send({ message: 'User created successfully', data: last });
+        res.send({ message: 'Event created successfully', data: last });
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
     }
@@ -27,12 +26,12 @@ export async function create(req: Request, res: Response) {
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const users = await UserModel.findAll();
+        const events = await EventModel.findAll();
 
-        if (users.length === 0) {
-            res.send({ message: 'No user found.' });
+        if (events.length === 0) {
+            res.send({ message: 'No event found.' });
         } else {
-            res.send(users);
+            res.send(events);
         }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
@@ -42,9 +41,9 @@ export async function getAll(req: Request, res: Response) {
 export async function getOne(req: Request, res: Response) {
     try {
         const id = req.body.id;
-        const user = UserModel.findOne(id);
+        const event = EventModel.findOne(id);
 
-        res.send(user);
+        res.send(event);
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
     }
@@ -55,9 +54,9 @@ export async function update(req: Request, res: Response) {
         const id = req.params.id;
         const values = req.body;
 
-        const updatedUser = await UserModel.update(values, { where: { id } });
+        const updatedEvent = await EventModel.update(values, { where: { id } });
 
-        if (updatedUser) {
+        if (updatedEvent) {
             res.status(200).send({
                 values,
                 message: 'Changement(s) enregisté(s).'
@@ -71,12 +70,12 @@ export async function update(req: Request, res: Response) {
 export async function remove(req: Request, res: Response) {
     try {
         const id = req.params.id;
-        const removedUser = await UserModel.destroy({ where: { id } });
+        const removedEvent = await EventModel.destroy({ where: { id } });
 
-        if (removedUser === 1) {
-            res.send({ message: 'User deleted successfully.' });
+        if (removedEvent === 1) {
+            res.send({ message: 'Event deleted successfully.' });
         } else {
-            res.send({ message: `Cannot remove user with id ${id}, maybe already removed.` });
+            res.send({ message: `Cannot remove event with id ${id}, maybe already removed.` });
         }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
@@ -85,7 +84,7 @@ export async function remove(req: Request, res: Response) {
 
 export async function removeAll(req: Request, res: Response) {
     try {
-        const removedAll = await UserModel.destroy({ truncate: true });
+        const removedAll = await EventModel.destroy({ truncate: true });
 
         res.send({ message: `${removedAll} partenaires on bien été supprimé.` });
     } catch (error) {

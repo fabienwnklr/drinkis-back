@@ -6,6 +6,7 @@ const Database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process
 });
 
 // Import all models
+import { EventModel } from './event.model';
 import { PartnerModel } from './partner.model';
 import { UserModel } from './user.model';
 
@@ -13,5 +14,6 @@ import { UserModel } from './user.model';
 export {
     PartnerModel,
     UserModel,
+    EventModel,
     Database
 };

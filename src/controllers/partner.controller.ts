@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { catchAsync } from '../utils';
 import { PartnerModel } from '../models';
+import { catchAsync } from '../utils';
 
 // Types
 import { PartnerAttributes } from '../types/partner';
@@ -57,23 +57,23 @@ export async function update(req: Request, res: Response) {
         if (updatedPartner) {
             res.status(200).send({
                 values,
-                message: "Changement(s) enregisté(s).",
+                message: 'Changement(s) enregisté(s).',
             });
         }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
     }
-};
+}
 
 export async function remove(req: Request, res: Response) {
     try {
         const id = req.params.id;
         const removedPartner = await PartnerModel.destroy({ where: { id } });
-        
+
         if (removedPartner === 1) {
-            res.send({ message: 'Partner deleted successfully.'})
+            res.send({ message: 'Partner deleted successfully.'});
         } else {
-            res.send({ message: `Cannot remove partner with id ${id}, maybe already removed.`})
+            res.send({ message: `Cannot remove partner with id ${id}, maybe already removed.`});
         }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
