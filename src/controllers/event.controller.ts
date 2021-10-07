@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
+import { Op } from 'sequelize';
 import { EventModel } from '../models';
 import { catchAsync } from '../utils';
-import { Op } from 'sequelize'
 
 // Types
 import { EventAttributes } from '../types/event';
