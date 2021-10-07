@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { EventModel } from '../models';
 import { catchAsync } from '../utils';
+import { Op } from 'sequelize'
 
 // Types
 import { EventAttributes } from '../types/event';
@@ -32,6 +33,28 @@ export async function getAll(req: Request, res: Response) {
             res.send({ message: 'No event found.' });
         } else {
             res.send(events);
+        }
+    } catch (error) {
+        catchAsync(res, 'An error occured, please contact admin.', error);
+    }
+}
+
+export async function getAllActive(req: Request, res: Response) {
+    try {
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        const activeEvents = await EventModel.findAll({
+            where: {
+                start_date: {
+                    [Op.gte]: currentDate
+                }
+            }
+        });
+
+        if (activeEvents.length === 0) {
+            res.send({ message: 'No event found.' });
+        } else {
+            res.send(activeEvents);
         }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);

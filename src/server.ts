@@ -19,7 +19,7 @@ app.get('/', (req: Request, res: Response) => {
 PatnerRoutes(app);
 
 try {
-    Database.sync({ force: false }).then(() => {
+    Database.sync({ force: true }).then(() => {
         console.info('Re-sync db.');
         app.listen(port, () => {
             console.log(`API running on http://localhost:${port}`);
