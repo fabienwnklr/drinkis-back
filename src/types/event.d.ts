@@ -1,6 +1,6 @@
 import { Optional, Model } from 'sequelize';
 
-export interface EventAttributes {
+declare interface EventAttributes {
     id?: number;
     name: string;
     start_date: string;
@@ -10,9 +10,9 @@ export interface EventAttributes {
     updatedBy?: string;
 }
 
-export interface EventCreationAttributes extends Optional<EventAttributes, 'id'> {}
+declare interface EventCreationAttributes extends Optional<EventAttributes, 'id'> {}
 
-export interface EventInstance extends Model<EventAttributes, EventCreationAttributes>, EventAttributes {
+declare interface EventInstance extends Model<EventAttributes, EventCreationAttributes>, EventAttributes {
     createdAt?: Date;
     updatedAt?: Date;
 }
