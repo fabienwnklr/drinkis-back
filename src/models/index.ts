@@ -9,8 +9,12 @@ const Database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process
 import { EventModel } from './event.model';
 import { PartnerModel } from './partner.model';
 import { UserModel } from './user.model';
+// import { Associate } from './associate';
 
-// Export all .. import..export..import..export again..
+EventModel.hasOne(PartnerModel, {
+    foreignKey: 'event_id'
+});
+
 export {
     PartnerModel,
     UserModel,

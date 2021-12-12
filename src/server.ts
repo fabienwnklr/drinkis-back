@@ -15,13 +15,17 @@ app.use(express.urlencoded({ extended: true }));
 PatnerRoutes(app);
 
 try {
-    Database.sync({ force: true }).then(() => {
-        console.info('Re-sync db.');
-        app.listen(port, () => {
-            console.log(`API running on http://localhost:${port}`);
-            createDB();
+    Database.sync({ force: true })
+        .then(() => {
+            console.info('Re-sync db.');
+            app.listen(port, () => {
+                console.log(`API running on http://localhost:${port}`);
+                createDB();
+            });
+        })
+        .catch((error) => {
+            console.error('Error running', error);
         });
-    });
 } catch (error) {
     console.log(`Error occurred: ${error.message}`);
 }

@@ -3,7 +3,7 @@ import { EventInstance } from '../types/event';
 import { Database } from './index';
 
 export const EventModel = Database.define<EventInstance>(
-    'Partner',
+    'Event',
     {
         // Model attributes are defined here
         name: {
