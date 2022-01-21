@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { TokenExpiredError } from 'jsonwebtoken'
 /**
  * @param {Request} req
  * @param {Response} res
@@ -14,8 +15,9 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
             const token = bearerToken;
             jwt.verify(token, 'secretkey', (err, user) => {
                 if (err) {
-                    if (err instanceof jwt.TokenExpiredError) {
+                    if (err instanceof TokenExpiredError) {
                         res.status(401).send({
+                            err,
                             message: 'Connection timed out'
                         });
                     } else {
