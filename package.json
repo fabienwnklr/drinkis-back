@@ -6,6 +6,7 @@
     "scripts": {
         "build": "tsc",
         "dev": "tslint -c tslint.json -p tsconfig.json --fix && nodemon ./src/server.ts",
+        "serve": "node ./dist/server.js",
         "format": "tslint -c tslint.json -p tsconfig.json --fix"
     },
     "devDependencies": {
