@@ -26,11 +26,11 @@ export async function getAll(req: Request, res: Response) {
     try {
         const partners = await PartnerModel.findAll();
 
-        if (partners.length === 0) {
-            res.send({ message: 'No partner found.' });
-        } else {
+        // if (partners.length === 0) {
+            // res.send({});
+        // } else {
             res.send(partners);
-        }
+        // }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
     }

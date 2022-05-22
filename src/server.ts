@@ -1,14 +1,15 @@
 import { config } from 'dotenv';
 config();
 
-import express, { Application, Request, Response } from 'express';
+import cors from 'cors';
+import express, { Application } from 'express';
 import { createDB } from './db';
 import { Database } from './models';
 import PatnerRoutes from './routes/partner.routes';
-
 const app: Application = express();
 const port = process.env.port || 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
