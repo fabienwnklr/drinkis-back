@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 PatnerRoutes(app);
 
 try {
-    Database.sync({ force: true })
+    Database.sync({ force: false })
         .then(() => {
             console.info('Re-sync db.');
             app.listen(port, () => {

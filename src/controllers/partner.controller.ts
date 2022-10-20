@@ -29,7 +29,7 @@ export async function getAll(req: Request, res: Response) {
         // if (partners.length === 0) {
             // res.send({});
         // } else {
-            res.send(partners);
+        res.send(partners);
         // }
     } catch (error) {
         catchAsync(res, 'An error occured, please contact admin.', error);
